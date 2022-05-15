@@ -1,0 +1,413 @@
+@charset "UTF-8";
+/*------------------------
+reset
+------------------------*/
+*,
+::before,
+::after {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+*{
+  font-size: inherit;
+  line-height: inherit;
+}
+
+::before,
+::after{
+  text-decoration: inherit;
+  vertical-align: inherit;
+}
+
+html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp,
+small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, dialog, figure, footer, header, main, menu, nav, section,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  vertical-align: baseline;
+}
+
+header, footer, article, section, aside, main, nav, menu, figure, figcaption {
+  display: block;
+}
+
+
+span, small, strong, em, b, i {
+  color: inherit;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  border: 0;
+  vertical-align: top;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+caption, th {
+  text-align: left;
+}
+
+input, select {
+  vertical-align: middle;
+}
+
+input, textarea {
+  margin: 0;
+  padding: 0;
+}
+
+address {
+  font-style: normal;
+}
+
+q::before,
+q::after {
+  display: none;
+}
+
+/* base
+----------------------------------------*/
+@font-face {
+  font-family: 'いろはマル';
+  src: url(/font/irohamaru-Regular.woff2) format(woff2),url(/font/irohamaru-Regular.woff) format(woff);
+}
+
+@font-face {
+  font-family: 'うずらフォント';
+  src: url(/font/uzura.woff2) format(woff2),url(/font/uzura.woff) format(woff);
+}
+
+body {
+  color: #1A1C36;
+  font-family: 'いろはマル', sans-serif;
+  line-height: 1.5;
+}
+
+a {
+  color: #1A1C36;
+  transition: color 0.3s;
+}
+a:hover {
+  color: gray;
+  text-decoration: none;
+}
+
+/* header
+----------------------------------------*/
+.header {
+  position: fixed;
+  display:flex;
+  top:0;
+  z-index: 10000;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 60px;
+  box-shadow: 0 0px 10px rgba(0, 0, 0, 0.08);
+  background-color: #fff;
+}
+
+.header__logo {
+  flex-shrink: 0;
+  width: 120px;
+  margin-left: 24px;
+}
+
+/* hamburger
+----------------------------------------*/
+.hamburger {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: inherit;
+  cursor: pointer;
+  border: 0;
+  background-color: #FF9C1A;
+}
+
+.hamburger__line {
+  position: relative;
+  width: 26px;
+  height: 2px;
+  background-color: #fff;
+}
+
+.hamburger__line::before,
+.hamburger__line::after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 26px;
+  height: 2px;
+  background-color: #fff;
+  transition: transform 0.3s;
+}
+
+.hamburger__line::before {
+  top: -8px;
+}
+
+.hamburger__line::after {
+  bottom: -8px;
+}
+
+#btnHamburger:checked ~ .hamburger span {
+    background-color: rgba(255, 255, 255, 0);/*メニューオープン時は真ん中の線を透明にする*/
+}
+
+#btnHamburger:checked ~ .hamburger span::before {
+    top: 0;
+    transform: rotate(45deg);
+}
+
+#btnHamburger:checked ~ .hamburger span::after {
+    bottom: 0;
+    transform: rotate(-45deg);
+}
+
+#btnHamburger {
+  display: none;
+}
+
+@media screen and (min-width:768px),print {
+  .hamburger{
+    display: none;
+  }
+}
+
+/* gnav
+----------------------------------------*/
+.gnav__list {
+  color: inherit;
+}
+
+.gnav__link {
+  color: inherit;
+  font-weight: bold;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.gnav__link:hover {
+  color: rgb(217, 217, 217);
+}
+
+/* スマホ用 */
+@media screen and (max-width: 767px) {
+  .gnav{
+    width: 100%;
+    height: 100%;
+    left: 100%;
+    position: fixed;
+    top:60px;
+    z-index: 100;
+    transition: all 0.5s;
+    background-color: rgb(240, 240, 240);
+  }
+
+  #btnHamburger:checked ~ .gnav {
+    left: 0;
+  }
+
+  .gnav__link {
+    display: block;
+    padding: 18px 30px;
+    font-size: 18px;
+  }
+
+  .gnav__link:hover {
+    background-color: #F6F6F6;
+  }
+
+  .gnav__btn {
+      text-align: center;
+      border-radius: 100px;
+      transition: background-color 0.3s, color 0.3s;
+      margin: 20px auto;
+      width:90%;
+      height:50px;
+      display:block;
+      position:relative;
+      z-index:0;
+      color: #fff;
+      background: transparent;
+      overflow: hidden;
+      line-height:50px;
+      padding: 0;
+    }
+
+    .gnav__btn:before {
+      content:"";
+      width:100%;
+      height:100%;
+      position:absolute;
+      z-index:-1;
+      left:0;
+      transition:0.5s;
+      background: -moz-linear-gradient(40deg, #FF9C1A, #FF31AD);
+      background: -webkit-linear-gradient(40deg, #FF9C1A, #FF31AD);
+      background: linear-gradient(50deg, #FF9C1A, #FF31AD);
+    }
+
+    .gnav__btn:after{
+        content:"";
+        width:100%;
+        height:100%;
+        position:absolute;
+        z-index:-2;
+        left:0;
+        background: -moz-linear-gradient(40deg, #1A1C36, #1A1C36);
+        background: -webkit-linear-gradient(40deg, #1A1C36, #1A1C36);
+        background: linear-gradient(50deg, #1A1C36, #1A1C36);
+      }
+
+    .gnav__btn:hover:before{
+        opacity:0;
+      }
+}
+
+/* PC用 */
+@media screen and (min-width:768px),print {
+  .gnav{
+    display: block;
+    position: static;
+    width: auto;
+    height: auto;
+  }
+
+  .gnav__list {
+    display: flex;
+    font-size: 16px;
+  }
+
+  .gnav__item {
+    padding: 0 24px;
+    margin: auto;
+  }
+
+  .gnav__btn {
+    text-align: center;
+    border-radius: 100px;
+    transition: background-color 0.3s, color 0.3s;
+    width:120px;
+    height:40px;
+    display:block;
+    position:relative;
+    z-index:0;
+    color: #fff;
+    background: transparent;
+    overflow: hidden;
+    line-height:40px;
+  }
+
+  .gnav__btn:before {
+    content:"";
+    width:100%;
+    height:100%;
+    position:absolute;
+    z-index:-1;
+    left:0;
+    transition:0.5s;
+    background: -moz-linear-gradient(40deg, #FF9C1A, #FF31AD);
+    background: -webkit-linear-gradient(40deg, #FF9C1A, #FF31AD);
+    background: linear-gradient(50deg, #FF9C1A, #FF31AD);
+  }
+
+  .gnav__btn:after{
+      content:"";
+      width:100%;
+      height:100%;
+      position:absolute;
+      z-index:-2;
+      left:0;
+      background: -moz-linear-gradient(40deg, #1A1C36, #1A1C36);
+      background: -webkit-linear-gradient(40deg, #1A1C36, #1A1C36);
+      background: linear-gradient(50deg, #1A1C36, #1A1C36);
+    }
+
+  .gnav__btn:hover:before{
+      opacity:0;
+    }
+}
+
+/* footer
+----------------------------------------*/
+.footer {
+  background-color: #1A1C36;
+  color: #fff;
+  text-align: center;
+}
+
+.footer__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 50px 20px 10px 20px;
+}
+
+.footer__menu {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer__items {
+  display: block;
+  color: #fff;
+  text-decoration: none;
+  padding: 10px 20px;
+  font-size: 14px;
+}
+
+.footer__items:hover {
+  color: rgb(217, 217, 217);
+}
+
+.footer__logo {
+  width: 120px;
+}
+
+.footer__margin {
+  margin-bottom: 20px;
+}
+
+.footer__inner img {
+  width: 190px;
+}
+
+.footer__copyright {
+  font-size: 12px;
+}
+
+@media screen and (min-width:768px),print {
+  .footer__menu {
+    flex-direction: row;
+  }
+}
